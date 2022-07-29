@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.news.NewsFragment">
+
+    <EditText
+        android:id="@+id/fragment_news_editText_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="100"
+        android:textSize="24sp"
+        android:hint="Напишите свою новость" />
+
+    <Button
+        android:id="@+id/fragment_news_button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить"/>
+
+    <TextView
+        android:id="@+id/fragment_news_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="100"
+        android:textSize="24sp"
+        android:visibility="gone"/>
+
+</LinearLayout>

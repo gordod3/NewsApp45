@@ -6,13 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import kg.geektech.newsapp45.Prefs
 import kg.geektech.newsapp45.databinding.FragmentProfileBinding
 
 
 class ProfileFragment : Fragment() {
 
     var getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        Prefs(requireContext()).saveAvatarURI(uri.toString())
         binding.fragmentImageViewProfile.setImageURI(uri)
     }
 
@@ -29,6 +33,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (!Prefs(requireContext()).getAvatarUri().equals(null)) Glide.with(this).load(Prefs(requireContext()).getAvatarUri()?.toUri()).centerCrop().into(binding.fragmentImageViewProfile)
         binding.fragmentImageViewProfile.setOnClickListener{
             getContent.launch("image/*")
         }

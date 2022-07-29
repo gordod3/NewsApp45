@@ -28,4 +28,14 @@
         android:name="kg.geektech.newsapp45.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="kg.geektech.newsapp45.ui.news.NewsFragment"
+        android:label="Create news"
+        tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="kg.geektech.newsapp45.ui.board.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" />
 </navigation>
