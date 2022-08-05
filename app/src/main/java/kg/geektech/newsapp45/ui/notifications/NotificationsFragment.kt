@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import kg.geektech.newsapp45.R
 import kg.geektech.newsapp45.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {
@@ -38,5 +40,12 @@ class NotificationsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.root.setOnClickListener(){
+            findNavController().navigate(R.id.boardFragment)
+        }
     }
 }

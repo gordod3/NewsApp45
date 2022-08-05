@@ -18,6 +18,7 @@ class ProfileFragment : Fragment() {
     var getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         Prefs(requireContext()).saveAvatarURI(uri.toString())
         binding.fragmentImageViewProfile.setImageURI(uri)
+        binding.fragmentImageViewProfileBackground.setImageURI(uri)
     }
 
     private lateinit var binding : FragmentProfileBinding
@@ -33,7 +34,10 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!Prefs(requireContext()).getAvatarUri().equals(null)) Glide.with(this).load(Prefs(requireContext()).getAvatarUri()?.toUri()).centerCrop().into(binding.fragmentImageViewProfile)
+        if (!Prefs(requireContext()).getAvatarUri().equals(null)){
+            Glide.with(this).load(Prefs(requireContext()).getAvatarUri()?.toUri()).centerCrop().into(binding.fragmentImageViewProfile)
+            Glide.with(this).load(Prefs(requireContext()).getAvatarUri()?.toUri()).centerCrop().into(binding.fragmentImageViewProfileBackground)
+        }
         binding.fragmentImageViewProfile.setOnClickListener{
             getContent.launch("image/*")
         }

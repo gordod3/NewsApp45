@@ -104,22 +104,22 @@ class BoardFragment : Fragment() {
         for ( index in 0..listVPDots.size - 1) listVPDots[index].setOnClickListener(){ viewPager.setCurrentItem(index)}
         listItems = arrayListOf(
             ItemBoard(
-                "https://previews.123rf.com/images/tomozina/tomozina1801/tomozina180100113/93160791-assistant-robot-android-line-icon-character-cartoon-bot-chat-bot-alien-astronaut-with-antenna-in-cir.jpg",
+                R.raw.robot_hello,
                 "Hello",
                 "Welcome here"
             ),
             ItemBoard(
-                "https://cdn4.vectorstock.com/i/thumb-large/41/73/black-thin-line-chatbot-logo-like-support-vector-23454173.jpg",
+                R.raw.robot_helping,
                 "Waiting for you",
                 "We glad to see you"
             ),
             ItemBoard(
-                "https://img.freepik.com/premium-vector/robot-icon-chat-bot-sign-for-support-service-concept-chatbot-character-flat-style_41737-796.jpg?w=2000",
+                R.raw.robot_support,
                 "We starting",
                 "Scroll next page"
             ),
             ItemBoard(
-                "https://img.freepik.com/premium-vector/cute-smiling-robot-chat-bot-communication-signs-modern-flat-cartoon-character-illustration-isolated-white-speak-bubble-voice-support-service-communication-chat-bot_92289-518.jpg",
+                R.raw.robot_analysis,
                 "It's time",
                 "Press button below"
             )

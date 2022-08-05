@@ -7,11 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/item_board_titleImage"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/item_board_titleLottieAnim"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:src="@mipmap/ic_launcher"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         android:layout_marginBottom="64dp"/>
 
     <TextView

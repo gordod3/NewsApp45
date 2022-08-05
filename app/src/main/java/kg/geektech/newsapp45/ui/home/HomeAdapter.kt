@@ -7,7 +7,8 @@ import kg.geektech.newsapp45.databinding.ItemNewsBinding
 import kg.geektech.newsapp45.ui.news.ItemNews
 import java.time.format.DateTimeFormatter
 
-class HomeAdapter(private var list: ArrayList<ItemNews>, private val onClick : (news : ItemNews) -> Unit, private val onLongClickListener : (position : Int) -> Unit) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter( var list: ArrayList<ItemNews>, private val onClick : (news : ItemNews) -> Unit, private val onLongClickListener : (position : Int) -> Unit) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+    var displayList = arrayListOf<ItemNews>()
 
     inner class ViewHolder(private var binding : ItemNewsBinding) : RecyclerView.ViewHolder(binding.root) {
         private val dtf = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy")
@@ -32,21 +33,22 @@ class HomeAdapter(private var list: ArrayList<ItemNews>, private val onClick : (
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(displayList[position])
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return displayList.size
     }
 
     fun addItem(news: ItemNews){
         list.add(0, news)
+        displayList.add(0, news)
         notifyItemChanged(0)
     }
 
     fun delete(position: Int) {
         list.removeAt(position)
+        displayList.removeAt(position)
         notifyItemRemoved(position)
-
     }
 }

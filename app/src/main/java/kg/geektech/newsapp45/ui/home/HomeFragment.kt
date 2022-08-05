@@ -8,16 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kg.geektech.newsapp45.Enum
+import kg.geektech.newsapp45.MainActivity
 import kg.geektech.newsapp45.R
 import kg.geektech.newsapp45.databinding.FragmentHomeBinding
+import kg.geektech.newsapp45.ui.OnSearchAction
 import kg.geektech.newsapp45.ui.news.ItemNews
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnSearchAction {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: HomeAdapter
-    private lateinit var builder : AlertDialog.Builder
+    private lateinit var builder: AlertDialog.Builder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +31,11 @@ class HomeFragment : Fragment() {
         }) {
             deleteItem(it)
         }
+        val mainActivity = requireActivity() as MainActivity
+        mainActivity.onSearch = this
     }
 
-    private fun loadItem(item : ItemNews) {
+    private fun loadItem(item: ItemNews) {
         val bundle = Bundle()
         bundle.putSerializable(Enum.BUNDLE_KEY_ITEM_NEWS.name, item)
         parentFragmentManager.setFragmentResult(Enum.RC_FRAGMENT_NEWS_LOAD.name, bundle)
@@ -40,10 +44,10 @@ class HomeFragment : Fragment() {
 
     private fun deleteItem(position: Int) {
         builder.setTitle("Удалить?")
-        builder.setPositiveButton("Да"){dialog, which ->
+        builder.setPositiveButton("Да") { dialog, which ->
             adapter.delete(position)
         }
-        builder.setNegativeButton("Нет"){dialog, which ->
+        builder.setNegativeButton("Нет") { dialog, which ->
 
         }
         builder.show()
@@ -80,5 +84,21 @@ class HomeFragment : Fragment() {
         }
 
         binding.fragmentHomeRecyclerView.adapter = adapter
+    }
+
+    override fun onSearch(searchedText: String?) {
+        if (searchedText!!.isNotEmpty()) {
+            adapter.displayList.clear()
+            adapter.list.forEach {
+                if (it.title.contains(searchedText)) {
+                    adapter.displayList.add(it)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        } else {
+            adapter.displayList.clear()
+            adapter.displayList.addAll(adapter.list)
+            adapter.notifyDataSetChanged()
+        }
     }
 }
